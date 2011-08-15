@@ -5,25 +5,32 @@
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.7.4
+Version:	1.7.6
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://www.clutter-project.org/sources/cogl/1.7/%{name}-%{version}.tar.xz
-# Source0-md5:	ad6937676e0df43be5befe7dc13084cd
+Source0:	http://source.clutter-project.org/sources/cogl/1.7/%{name}-%{version}.tar.xz
+# Source0-md5:	1e46c63c9b820471cdc12a7af87d8458
+Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake >= 1:1.11
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	cairo-devel >= 1.10
+BuildRequires:	gettext-devel >= 0.17
 BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	gtk-doc >= 1.13
 BuildRequires:	libdrm-devel
+BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	pango-devel >= 1:1.20
 BuildRequires:	pkgconfig
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libXcomposite-devel >= 0.4
 BuildRequires:	xorg-lib-libXdamage-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel >= 3
+BuildRequires:	xz
 Suggests:	OpenGL
 Requires:	cairo >= 1.10
 Requires:	glib2 >= 1:2.26.0
@@ -91,8 +98,15 @@ Ten pakiet zawiera dokumentację API cogl.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+%{__gettextize}
+%{__libtoolize}
+%{__aclocal} -I build/autotools
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	--disable-gdk-pixbuf \
 	--disable-silent-rules \

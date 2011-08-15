@@ -1,0 +1,11 @@
+--- cogl-1.7.6/configure.ac.orig	2011-08-12 18:39:19.000000000 +0200
++++ cogl-1.7.6/configure.ac	2011-08-15 10:40:17.109672588 +0200
+@@ -866,7 +866,7 @@
+                  [gobject gthread gmodule-no-export])
+ AS_IF([test "x$have_glib" = "xno"], AC_MSG_ERROR([glib-2.0 is required]))
+ 
+-COGL_PKG_REQUIRES="$COGL_PKG_REQUIRES glib-2.0"
++COGL_PKG_REQUIRES="$COGL_PKG_REQUIRES glib-2.0 gmodule-no-export-2.0 gobject-2.0"
+ AC_SUBST(COGL_PKG_REQUIRES)
+ PKG_CHECK_MODULES(COGL_DEP, [$COGL_PKG_REQUIRES])
+ if test -n "$COGL_PKG_REQUIRES_GL"; then
