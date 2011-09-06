@@ -5,13 +5,12 @@
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.7.6
+Version:	1.7.8
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://source.clutter-project.org/sources/cogl/1.7/%{name}-%{version}.tar.xz
-# Source0-md5:	1e46c63c9b820471cdc12a7af87d8458
-Patch0:		%{name}-link.patch
+# Source0-md5:	8bc6ffd906149616b9721dd0a902027b
 URL:		http://www.clutter-project.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
@@ -98,7 +97,6 @@ Ten pakiet zawiera dokumentację API cogl.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__gettextize}
