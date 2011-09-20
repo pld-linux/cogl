@@ -5,18 +5,18 @@
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.7.8
+Version:	1.8.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://source.clutter-project.org/sources/cogl/1.7/%{name}-%{version}.tar.xz
-# Source0-md5:	8bc6ffd906149616b9721dd0a902027b
+Source0:	http://source.clutter-project.org/sources/cogl/1.8/%{name}-%{version}.tar.xz
+# Source0-md5:	d00d3639c75660d5c6a989ab932e9914
 URL:		http://www.clutter-project.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	cairo-devel >= 1.10
-BuildRequires:	gettext-devel >= 0.17
+BuildRequires:	gettext-devel >= 0.18.1
 BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	gtk-doc >= 1.13
@@ -29,6 +29,7 @@ BuildRequires:	xorg-lib-libXcomposite-devel >= 0.4
 BuildRequires:	xorg-lib-libXdamage-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel >= 3
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Suggests:	OpenGL
 Requires:	cairo >= 1.10
@@ -139,7 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS README
 %attr(755,root,root) %{_libdir}/libcogl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl.so.2
+%attr(755,root,root) %ghost %{_libdir}/libcogl.so.5
 %attr(755,root,root) %{_libdir}/libcogl-pango.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.0
 %{_libdir}/girepository-1.0/Cogl-1.0.typelib
