@@ -6,7 +6,7 @@ Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
 Version:	1.8.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://source.clutter-project.org/sources/cogl/1.8/%{name}-%{version}.tar.xz
@@ -37,6 +37,7 @@ Requires:	glib2 >= 1:2.26.0
 Requires:	pango >= 1:1.20
 Requires:	xorg-lib-libXcomposite >= 0.4
 Requires:	xorg-lib-libXfixes >= 3
+Conflicts:	clutter < 1.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -66,6 +67,7 @@ Requires:	xorg-lib-libXcomposite-devel >= 0.4
 Requires:	xorg-lib-libXdamage-devel
 Requires:	xorg-lib-libXext-devel
 Requires:	xorg-lib-libXfixes-devel >= 3
+Conflicts:	clutter-devel < 1.8.0
 
 %description devel
 Header files for building and developing applications with cogl.
@@ -78,6 +80,7 @@ Summary:	Static cogl libraries
 Summary(pl.UTF-8):	Statyczne biblioteki cogl
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+Conflicts:	clutter-static < 1.8.0
 
 %description static
 Static cogl libraries.
