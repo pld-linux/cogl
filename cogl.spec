@@ -5,16 +5,16 @@
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.8.0
-Release:	2
+Version:	1.8.2
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://source.clutter-project.org/sources/cogl/1.8/%{name}-%{version}.tar.xz
-# Source0-md5:	d00d3639c75660d5c6a989ab932e9914
+# Source0-md5:	2c527075b7205ce98d320945496b0b58
 URL:		http://www.clutter-project.org/
+BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	cairo-devel >= 1.10
 BuildRequires:	gettext-devel >= 0.18.1
 BuildRequires:	glib2-devel >= 1:2.26.0
@@ -25,18 +25,18 @@ BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	pango-devel >= 1:1.20
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXcomposite-devel >= 0.4
 BuildRequires:	xorg-lib-libXdamage-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel >= 3
-BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
-Suggests:	OpenGL
 Requires:	cairo >= 1.10
 Requires:	glib2 >= 1:2.26.0
 Requires:	pango >= 1:1.20
 Requires:	xorg-lib-libXcomposite >= 0.4
 Requires:	xorg-lib-libXfixes >= 3
+Suggests:	OpenGL
 Conflicts:	clutter < 1.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
