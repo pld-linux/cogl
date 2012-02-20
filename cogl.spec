@@ -5,19 +5,19 @@
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.8.2
+Version:	1.9.4
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://source.clutter-project.org/sources/cogl/1.8/%{name}-%{version}.tar.xz
-# Source0-md5:	2c527075b7205ce98d320945496b0b58
+Source0:	http://source.clutter-project.org/sources/cogl/1.9/%{name}-%{version}.tar.xz
+# Source0-md5:	3609adafebf8c864c133bfef5dd612af
 URL:		http://www.clutter-project.org/
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	cairo-devel >= 1.10
 BuildRequires:	gettext-devel >= 0.18.1
-BuildRequires:	glib2-devel >= 1:2.26.0
+BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	gtk-doc >= 1.13
 BuildRequires:	libdrm-devel
@@ -32,7 +32,7 @@ BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel >= 3
 BuildRequires:	xz
 Requires:	cairo >= 1.10
-Requires:	glib2 >= 1:2.26.0
+Requires:	glib2 >= 1:2.28.0
 Requires:	pango >= 1:1.20
 Requires:	xorg-lib-libXcomposite >= 0.4
 Requires:	xorg-lib-libXfixes >= 3
@@ -59,7 +59,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki cogl
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cairo-devel >= 1.10
-Requires:	glib2-devel >= 1:2.26.0
+Requires:	glib2-devel >= 1:2.28.0
 Requires:	gobject-introspection-devel >= 0.9.5
 Requires:	libdrm-devel
 Requires:	pango-devel >= 1:1.20
@@ -143,7 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS README
 %attr(755,root,root) %{_libdir}/libcogl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl.so.5
+%attr(755,root,root) %ghost %{_libdir}/libcogl.so.7
 %attr(755,root,root) %{_libdir}/libcogl-pango.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.0
 %{_libdir}/girepository-1.0/Cogl-1.0.typelib
