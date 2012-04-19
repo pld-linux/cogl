@@ -10,7 +10,7 @@ Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://source.clutter-project.org/sources/cogl/1.10/%{name}-%{version}.tar.xz
-# Source0-md5:	c5414188a64a6e68ed6f7c07e4e105c4
+# Source0-md5:	1e47d7b2942d365e21b32f6e884c401a
 URL:		http://www.clutter-project.org/
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.59
