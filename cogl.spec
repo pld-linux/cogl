@@ -9,7 +9,7 @@ Version:	1.10.4
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://source.clutter-project.org/sources/cogl/1.10/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.10/%{name}-%{version}.tar.xz
 # Source0-md5:	7f7b21f7e81678031fa2a49376c587af
 URL:		http://www.clutter-project.org/
 BuildRequires:	OpenGL-GLX-devel
