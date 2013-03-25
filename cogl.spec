@@ -5,12 +5,12 @@
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.12.2
+Version:	1.14.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	439fd7aa2195d76b5cd8ee393f0112b4
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.14/%{name}-%{version}.tar.xz
+# Source0-md5:	7eabaf4241c0b87cc9e3b0fa23fd0315
 URL:		http://www.clutter-project.org/
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.59
@@ -18,7 +18,7 @@ BuildRequires:	automake >= 1:1.11
 BuildRequires:	cairo-devel >= 1.10
 BuildRequires:	gdk-pixbuf2-devel >= 2.0
 BuildRequires:	gettext-devel >= 0.18.1
-BuildRequires:	glib2-devel >= 1:2.28.0
+BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	gtk-doc >= 1.13
 BuildRequires:	libdrm-devel
@@ -31,12 +31,14 @@ BuildRequires:	xorg-lib-libXcomposite-devel >= 0.4
 BuildRequires:	xorg-lib-libXdamage-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel >= 3
+BuildRequires:	xorg-lib-libXrandr-devel >= 1.2
 BuildRequires:	xz
 Requires:	cairo >= 1.10
-Requires:	glib2 >= 1:2.28.0
+Requires:	glib2 >= 1:2.32.0
 Requires:	pango >= 1:1.20
 Requires:	xorg-lib-libXcomposite >= 0.4
 Requires:	xorg-lib-libXfixes >= 3
+Requires:	xorg-lib-libXrandr >= 1.2
 Suggests:	OpenGL
 Conflicts:	clutter < 1.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -60,7 +62,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki cogl
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cairo-devel >= 1.10
-Requires:	glib2-devel >= 1:2.28.0
+Requires:	glib2-devel >= 1:2.32.0
 Requires:	gobject-introspection-devel >= 0.9.5
 Requires:	libdrm-devel
 Requires:	pango-devel >= 1:1.20
@@ -68,6 +70,7 @@ Requires:	xorg-lib-libXcomposite-devel >= 0.4
 Requires:	xorg-lib-libXdamage-devel
 Requires:	xorg-lib-libXext-devel
 Requires:	xorg-lib-libXfixes-devel >= 3
+Requires:	xorg-lib-libXrandr-devel >= 1.2
 Conflicts:	clutter-devel < 1.8.0
 
 %description devel
@@ -144,9 +147,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS README
 %attr(755,root,root) %{_libdir}/libcogl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl.so.11
+%attr(755,root,root) %ghost %{_libdir}/libcogl.so.12
 %attr(755,root,root) %{_libdir}/libcogl-pango.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.0
+%attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.12
 %{_libdir}/girepository-1.0/Cogl-1.0.typelib
 %{_libdir}/girepository-1.0/CoglPango-1.0.typelib
 
