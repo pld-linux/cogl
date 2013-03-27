@@ -1,6 +1,7 @@
 #
 # Conditional build
 %bcond_without	static_libs	# static libraries
+%bcond_with	gdkpixbuf	# gdk-pixbuf for image loading [instead of stb_image]
 #
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
@@ -16,7 +17,7 @@ BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	cairo-devel >= 1.10
-BuildRequires:	gdk-pixbuf2-devel >= 2.0
+%{?with_gdkpixbuf:BuildRequires:	gdk-pixbuf2-devel >= 2.0}
 BuildRequires:	gettext-devel >= 0.18.1
 BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	gobject-introspection-devel >= 0.9.5
@@ -62,6 +63,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki cogl
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cairo-devel >= 1.10
+%{?with_gdkpixbuf:Requires:	gdk-pixbuf2-devel >= 2.0}
 Requires:	glib2-devel >= 1:2.32.0
 Requires:	gobject-introspection-devel >= 0.9.5
 Requires:	libdrm-devel
@@ -114,7 +116,7 @@ Ten pakiet zawiera dokumentację API cogl.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-gdk-pixbuf \
+	%{!?with_gdkpixbuf:--disable-gdk-pixbuf} \
 	--disable-silent-rules \
 	--enable-cairo \
 	--enable-cogl-pango \
