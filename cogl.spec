@@ -2,17 +2,21 @@
 # Conditional build
 %bcond_without	static_libs	# static libraries
 %bcond_with	gdkpixbuf	# gdk-pixbuf for image loading [instead of stb_image]
+%bcond_without	gstreamer	# GStreamer support
+%bcond_with	wayland		# Wayland EGL support
 #
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.14.0
+Version:	1.16.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.14/%{name}-%{version}.tar.xz
-# Source0-md5:	7eabaf4241c0b87cc9e3b0fa23fd0315
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.16/%{name}-%{version}.tar.xz
+# Source0-md5:	611a61bed04354cbfffa3dc27feb6d4f
 URL:		http://www.clutter-project.org/
+%{?with_wayland:BuildRequires:	EGL-devel}
+%{?with_wayland:BuildRequires:	Mesa-libwayland-egl-devel >= 1.0.0}
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
@@ -21,12 +25,16 @@ BuildRequires:	cairo-devel >= 1.10
 BuildRequires:	gettext-devel >= 0.18.1
 BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	gobject-introspection-devel >= 0.9.5
+%{?with_gstreamer:BuildRequires:	gstreamer-devel >= 1.0}
+%{?with_gstreamer:BuildRequires:	gstreamer-plugins-base-devel >= 1.0}
 BuildRequires:	gtk-doc >= 1.13
 BuildRequires:	libdrm-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	pango-devel >= 1:1.20
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
+# wayland-client >= 1.0.0, wayland-server >= 1.1.90
+%{?with_wayland:BuildRequires:	wayland-devel >= 1.2.0}
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXcomposite-devel >= 0.4
 BuildRequires:	xorg-lib-libXdamage-devel
@@ -37,6 +45,7 @@ BuildRequires:	xz
 Requires:	cairo >= 1.10
 Requires:	glib2 >= 1:2.32.0
 Requires:	pango >= 1:1.20
+%{?with_wayland:Requires:	wayland >= 1.2.0}
 Requires:	xorg-lib-libXcomposite >= 0.4
 Requires:	xorg-lib-libXfixes >= 3
 Requires:	xorg-lib-libXrandr >= 1.2
@@ -62,12 +71,15 @@ Summary:	Header files for cogl library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki cogl
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+%{?with_wayland:Requires:	EGL-devel}
+%{?with_wayland:Requires:	Mesa-libwayland-egl-devel >= 1.0.0}
 Requires:	cairo-devel >= 1.10
 %{?with_gdkpixbuf:Requires:	gdk-pixbuf2-devel >= 2.0}
 Requires:	glib2-devel >= 1:2.32.0
 Requires:	gobject-introspection-devel >= 0.9.5
 Requires:	libdrm-devel
 Requires:	pango-devel >= 1:1.20
+%{?with_wayland:Requires:	wayland-devel >= 1.2.0}
 Requires:	xorg-lib-libXcomposite-devel >= 0.4
 Requires:	xorg-lib-libXdamage-devel
 Requires:	xorg-lib-libXext-devel
@@ -105,6 +117,56 @@ This package contains API documentation for cogl.
 %description doc -l pl.UTF-8
 Ten pakiet zawiera dokumentację API cogl.
 
+%package gst
+Summary:	GStreamer integration library for Cogl
+Summary(pl.UTF-8):	Biblioteka integrująca GStreamera z Cogl
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description gst
+GStreamer integration library for Cogl.
+
+%description gst -l pl.UTF-8
+Biblioteka integrująca GStreamera z Cogl.
+
+%package gst-devel
+Summary:	Header files for cogl-gst library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki cogl-gst
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-gst = %{version}-%{release}
+Requires:	gstreamer-devel >= 1.0
+Requires:	gstreamer-plugins-base-devel >= 1.0
+
+%description gst-devel
+Header files for cogl-gst library.
+
+%description gst-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki cogl-gst.
+
+%package gst-static
+Summary:	Static cogl-gst library
+Summary(pl.UTF-8):	Statyczna biblioteka cogl-gst
+Group:		Development/Libraries
+Requires:	%{name}-gst-devel = %{version}-%{release}
+
+%description gst-static
+Static cogl-gst library.
+
+%description gst-static -l pl.UTF-8
+Statyczna biblioteka cogl-gst.
+
+%package gst-apidocs
+Summary:	API documentation for cogl-gst library
+Summary(pl.UTF-8):	Dokumentacja API biblioteki cogl-gst
+Group:		Documentation
+
+%description gst-apidocs
+API documentation for cogl-gst library.
+
+%description gst-apidocs -l pl.UTF-8
+Dokumentacja API biblioteki cogl-gst.
+
 %prep
 %setup -q
 
@@ -119,11 +181,14 @@ Ten pakiet zawiera dokumentację API cogl.
 	%{!?with_gdkpixbuf:--disable-gdk-pixbuf} \
 	--disable-silent-rules \
 	--enable-cairo \
+	%{?with_gstreamer:--enable-cogl-gst} \
 	--enable-cogl-pango \
 	--enable-glx \
 	--enable-gtk-doc \
 	--enable-introspection \
 	%{?with_static_libs:--enable-static} \
+	%{?with_wayland:--enable-wayland-egl-platform} \
+	%{?with_wayland:--enable-wayland-egl-server} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
@@ -133,9 +198,14 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%if %{with gstreamer}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libgstcogl.la
+%if %{with static_libs}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libgstcogl.a
+%endif
+%endif
 # obsoleted by pkg-config
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libcogl.la
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libcogl-pango.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libcogl*.la
 
 %find_lang %{name}
 
@@ -149,9 +219,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS README
 %attr(755,root,root) %{_libdir}/libcogl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl.so.12
+%attr(755,root,root) %ghost %{_libdir}/libcogl.so.15
 %attr(755,root,root) %{_libdir}/libcogl-pango.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.12
+%attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.15
 %{_libdir}/girepository-1.0/Cogl-1.0.typelib
 %{_libdir}/girepository-1.0/CoglPango-1.0.typelib
 
@@ -159,7 +229,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcogl.so
 %attr(755,root,root) %{_libdir}/libcogl-pango.so
-%{_includedir}/cogl
+%dir %{_includedir}/cogl
+%{_includedir}/cogl/cogl
+%{_includedir}/cogl/cogl-pango
+%{_includedir}/cogl/cogl-path
 %{_pkgconfigdir}/cogl-1.0.pc
 %{_pkgconfigdir}/cogl-2.0-experimental.pc
 %{_pkgconfigdir}/cogl-gl-1.0.pc
@@ -179,3 +252,27 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_gtkdocdir}/cogl
 %{_gtkdocdir}/cogl-2.0-experimental
+
+%if %{with gstreamer}
+%files gst
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libcogl-gst.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcogl-gst.so.15
+%attr(755,root,root) %{_libdir}/gstreamer-1.0/libgstcogl.so
+
+%files gst-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libcogl-gst.so
+%{_includedir}/cogl/cogl-gst
+%{_pkgconfigdir}/cogl-gst.pc
+
+%if %{with static_libs}
+%files gst-static
+%defattr(644,root,root,755)
+%{_libdir}/libcogl-gst.a
+%endif
+
+%files gst-apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/cogl-gst
+%endif
