@@ -2,6 +2,8 @@
 # Conditional build
 %bcond_without	static_libs	# static libraries
 %bcond_with	gdkpixbuf	# gdk-pixbuf for image loading [instead of stb_image]
+%bcond_with	gles1		# OpenGL-ES 1.1 support
+%bcond_with	gles2		# OpenGL-ES 2.0 support
 %bcond_without	gstreamer	# GStreamer support
 %bcond_with	wayland		# Wayland EGL support
 #
@@ -14,9 +16,11 @@ License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.16/%{name}-%{version}.tar.xz
 # Source0-md5:	611a61bed04354cbfffa3dc27feb6d4f
+Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
 %{?with_wayland:BuildRequires:	EGL-devel}
 %{?with_wayland:BuildRequires:	Mesa-libwayland-egl-devel >= 1.0.0}
+%{?with_gles1:BuildRequires:	OpenGLESv1-devel >= 1.1}
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
@@ -117,6 +121,43 @@ This package contains API documentation for cogl.
 %description doc -l pl.UTF-8
 Ten pakiet zawiera dokumentację API cogl.
 
+%package gles2
+Summary:	Cogl frontend library for OpenGL-ES 2.0
+Summary(pl.UTF-8):	Biblioteka frontendowa Cogl dla OpenGL-ES 2.0
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description gles2
+Cogl frontend library for OpenGL-ES 2.0.
+
+%description gles2 -l pl.UTF-8
+Biblioteka frontendowa Cogl dla OpenGL-ES 2.0.
+
+%package gles2-devel
+Summary:	Header files for cogl-gles2 library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki cogl-gles2
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-gles2 = %{version}-%{release}
+
+%description gles2-devel
+Header files for cogl-gles2 library.
+
+%description gles2-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki cogl-gles2.
+
+%package gles2-static
+Summary:	Static cogl-gles2 library
+Summary(pl.UTF-8):	Statyczna biblioteka cogl-gles2
+Group:		Development/Libraries
+Requires:	%{name}-gst-devel = %{version}-%{release}
+
+%description gles2-static
+Static cogl-gles2 library.
+
+%description gles2-static -l pl.UTF-8
+Statyczna biblioteka cogl-gles2.
+
 %package gst
 Summary:	GStreamer integration library for Cogl
 Summary(pl.UTF-8):	Biblioteka integrująca GStreamera z Cogl
@@ -169,6 +210,7 @@ Dokumentacja API biblioteki cogl-gst.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__gettextize}
@@ -183,6 +225,8 @@ Dokumentacja API biblioteki cogl-gst.
 	--enable-cairo \
 	%{?with_gstreamer:--enable-cogl-gst} \
 	--enable-cogl-pango \
+	%{?with_gles1:--enable-gles1 --with-gles1-libname=libGLESv1_CM.so.1} \
+	%{?with_gles2:--enable-gles2 --with-gles2-libname=libGLESv2.so.2} \
 	--enable-glx \
 	--enable-gtk-doc \
 	--enable-introspection \
@@ -214,6 +258,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
+
+%post	gles2 -p /sbin/ldconfig
+%postun	gles2 -p /sbin/ldconfig
+
+%post	gst -p /sbin/ldconfig
+%postun	gst -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -252,6 +302,25 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_gtkdocdir}/cogl
 %{_gtkdocdir}/cogl-2.0-experimental
+
+%if %{with gles2}
+%files gles2
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libcogl-gles2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcogl-gles2.so.15
+
+%files gles2-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libcogl-gles2.so
+%{_includedir}/cogl/cogl-gles2
+%{_pkgconfigdir}/cogl-gles2-experimental.pc
+
+%if %{with static_libs}
+%files gles2-static
+%defattr(644,root,root,755)
+%{_libdir}/libcogl-gles2.a
+%endif
+%endif
 
 %if %{with gstreamer}
 %files gst
