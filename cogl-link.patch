@@ -1,0 +1,11 @@
+--- cogl-1.16.0/cogl-gles2/Makefile.am.wiget	2013-09-27 14:12:49.193848785 +0200
++++ cogl-1.16.0/cogl-gles2/Makefile.am	2013-09-27 14:13:58.607498221 +0200
+@@ -17,6 +17,8 @@ endif
+ AM_CFLAGS = $(COGL_DEP_CFLAGS) $(COGL_EXTRA_CFLAGS) $(MAINTAINER_CFLAGS)
+ 
+ libcogl_gles2_la_SOURCES = cogl-gles2-api.c
++libcogl_gles2_la_LIBADD = \
++			-L$(top_builddir)/cogl -lcogl
+ libcogl_gles2_la_LDFLAGS = \
+ 	-no-undefined \
+ 	-version-info @COGL_LT_CURRENT@:@COGL_LT_REVISION@:@COGL_LT_AGE@ \
