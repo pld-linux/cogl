@@ -1,17 +1,17 @@
 #
 # Conditional build
 %bcond_without	static_libs	# static libraries
-%bcond_with	gdkpixbuf	# gdk-pixbuf for image loading [instead of stb_image]
-%bcond_with	gles1		# OpenGL-ES 1.1 support
-%bcond_with	gles2		# OpenGL-ES 2.0 support
+%bcond_without	gdkpixbuf	# gdk-pixbuf for image loading [instead of stb_image]
+%bcond_without	gles1		# OpenGL-ES 1.1 support
+%bcond_without	gles2		# OpenGL-ES 2.0 support
 %bcond_without	gstreamer	# GStreamer support
-%bcond_with	wayland		# Wayland EGL support
+%bcond_without	wayland		# Wayland EGL support
 #
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
 Version:	1.16.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.16/%{name}-%{version}.tar.xz
