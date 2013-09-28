@@ -54,6 +54,9 @@ Requires:	xorg-lib-libXcomposite >= 0.4
 Requires:	xorg-lib-libXfixes >= 3
 Requires:	xorg-lib-libXrandr >= 1.2
 Suggests:	OpenGL
+%{?with_gles1:Provides:	cogl(gles1) = %{version}-%{release}}
+%{?with_gles2:Provides:	cogl(gles2) = %{version}-%{release}}
+%{?with_wayland:Provides:	cogl(wayland) = %{version}-%{release}}
 Conflicts:	clutter < 1.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -89,6 +92,9 @@ Requires:	xorg-lib-libXdamage-devel
 Requires:	xorg-lib-libXext-devel
 Requires:	xorg-lib-libXfixes-devel >= 3
 Requires:	xorg-lib-libXrandr-devel >= 1.2
+%{?with_gles1:Provides:	cogl-devel(gles1) = %{version}-%{release}}
+%{?with_gles2:Provides:	cogl-devel(gles2) = %{version}-%{release}}
+%{?with_wayland:Provides:	cogl-devel(wayland) = %{version}-%{release}}
 Conflicts:	clutter-devel < 1.8.0
 
 %description devel
@@ -102,6 +108,9 @@ Summary:	Static cogl libraries
 Summary(pl.UTF-8):	Statyczne biblioteki cogl
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+%{?with_gles1:Provides:	cogl-static(gles1) = %{version}-%{release}}
+%{?with_gles2:Provides:	cogl-static(gles2) = %{version}-%{release}}
+%{?with_wayland:Provides:	cogl-static(wayland) = %{version}-%{release}}
 Conflicts:	clutter-static < 1.8.0
 
 %description static
@@ -125,7 +134,7 @@ Ten pakiet zawiera dokumentację API cogl.
 Summary:	Cogl frontend library for OpenGL-ES 2.0
 Summary(pl.UTF-8):	Biblioteka frontendowa Cogl dla OpenGL-ES 2.0
 Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}(gles2) = %{version}-%{release}
 
 %description gles2
 Cogl frontend library for OpenGL-ES 2.0.
@@ -137,7 +146,7 @@ Biblioteka frontendowa Cogl dla OpenGL-ES 2.0.
 Summary:	Header files for cogl-gles2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki cogl-gles2
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-devel(gles2) = %{version}-%{release}
 Requires:	%{name}-gles2 = %{version}-%{release}
 
 %description gles2-devel
@@ -150,7 +159,7 @@ Pliki nagłówkowe biblioteki cogl-gles2.
 Summary:	Static cogl-gles2 library
 Summary(pl.UTF-8):	Statyczna biblioteka cogl-gles2
 Group:		Development/Libraries
-Requires:	%{name}-gst-devel = %{version}-%{release}
+Requires:	%{name}-gles2-devel = %{version}-%{release}
 
 %description gles2-static
 Static cogl-gles2 library.
