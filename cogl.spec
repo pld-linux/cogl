@@ -4,6 +4,7 @@
 %bcond_without	gdkpixbuf	# gdk-pixbuf for image loading [instead of stb_image]
 %bcond_without	gles1		# OpenGL-ES 1.1 support
 %bcond_without	gles2		# OpenGL-ES 2.0 support
+%bcond_without	kms		# KMS EGL support
 %bcond_without	gstreamer	# GStreamer support
 %bcond_without	wayland		# Wayland EGL support
 #
@@ -19,6 +20,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.16/%{name}-%{version}.tar
 Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
 %{?with_wayland:BuildRequires:	EGL-devel}
+%{?with_kms:BuildRequires:	Mesa-libgbm-devel}
 %{?with_wayland:BuildRequires:	Mesa-libwayland-egl-devel >= 1.0.0}
 %{?with_gles1:BuildRequires:	OpenGLESv1-devel >= 1.1}
 BuildRequires:	OpenGL-GLX-devel
@@ -56,6 +58,7 @@ Requires:	xorg-lib-libXrandr >= 1.2
 Suggests:	OpenGL
 %{?with_gles1:Provides:	cogl(gles1) = %{version}-%{release}}
 %{?with_gles2:Provides:	cogl(gles2) = %{version}-%{release}}
+%{?with_kms:Provides:	cogl(kms) = %{version}-%{release}}
 %{?with_wayland:Provides:	cogl(wayland) = %{version}-%{release}}
 Conflicts:	clutter < 1.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -79,6 +82,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki cogl
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_wayland:Requires:	EGL-devel}
+%{?with_kms:Requires:	Mesa-libgbm-devel}
 %{?with_wayland:Requires:	Mesa-libwayland-egl-devel >= 1.0.0}
 Requires:	cairo-devel >= 1.10
 %{?with_gdkpixbuf:Requires:	gdk-pixbuf2-devel >= 2.0}
@@ -94,6 +98,7 @@ Requires:	xorg-lib-libXfixes-devel >= 3
 Requires:	xorg-lib-libXrandr-devel >= 1.2
 %{?with_gles1:Provides:	cogl-devel(gles1) = %{version}-%{release}}
 %{?with_gles2:Provides:	cogl-devel(gles2) = %{version}-%{release}}
+%{?with_kms:Provides:	cogl-devel(kms) = %{version}-%{release}}
 %{?with_wayland:Provides:	cogl-devel(wayland) = %{version}-%{release}}
 Conflicts:	clutter-devel < 1.8.0
 
@@ -110,6 +115,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 %{?with_gles1:Provides:	cogl-static(gles1) = %{version}-%{release}}
 %{?with_gles2:Provides:	cogl-static(gles2) = %{version}-%{release}}
+%{?with_kms:Provides:	cogl-static(kms) = %{version}-%{release}}
 %{?with_wayland:Provides:	cogl-static(wayland) = %{version}-%{release}}
 Conflicts:	clutter-static < 1.8.0
 
@@ -239,10 +245,10 @@ Dokumentacja API biblioteki cogl-gst.
 	--enable-glx \
 	--enable-gtk-doc \
 	--enable-introspection \
+	--enable-kms-egl-platform \
 	%{?with_static_libs:--enable-static} \
 	%{?with_wayland:--enable-wayland-egl-platform} \
 	%{?with_wayland:--enable-wayland-egl-server} \
-	--enable-kms-egl-platform \
 	--enable-xlib-egl-platform \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
