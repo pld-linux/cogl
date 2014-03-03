@@ -289,6 +289,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libcogl.so.20
 %attr(755,root,root) %{_libdir}/libcogl-pango.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.20
+%attr(755,root,root) %{_libdir}/libcogl-path.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcogl-path.so.20
 %{_libdir}/girepository-1.0/Cogl-1.0.typelib
 %{_libdir}/girepository-1.0/CoglPango-1.0.typelib
 
@@ -296,6 +298,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcogl.so
 %attr(755,root,root) %{_libdir}/libcogl-pango.so
+%attr(755,root,root) %{_libdir}/libcogl-path.so
 %dir %{_includedir}/cogl
 %{_includedir}/cogl/cogl
 %{_includedir}/cogl/cogl-pango
@@ -305,6 +308,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/cogl-gl-1.0.pc
 %{_pkgconfigdir}/cogl-pango-1.0.pc
 %{_pkgconfigdir}/cogl-pango-2.0-experimental.pc
+%{_pkgconfigdir}/cogl-path-1.0.pc
+%{_pkgconfigdir}/cogl-path-2.0-experimental.pc
 %{_datadir}/gir-1.0/Cogl-1.0.gir
 %{_datadir}/gir-1.0/CoglPango-1.0.gir
 
@@ -313,6 +318,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libcogl.a
 %{_libdir}/libcogl-pango.a
+%{_libdir}/libcogl-path.a
 %endif
 
 %files doc
@@ -330,7 +336,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcogl-gles2.so
 %{_includedir}/cogl/cogl-gles2
-%{_pkgconfigdir}/cogl-gles2-experimental.pc
+%{_pkgconfigdir}/cogl-gles2-1.0.pc
+%{_pkgconfigdir}/cogl-gles2-2.0-experimental.pc
 
 %if %{with static_libs}
 %files gles2-static
@@ -350,7 +357,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcogl-gst.so
 %{_includedir}/cogl/cogl-gst
-%{_pkgconfigdir}/cogl-gst.pc
+%{_pkgconfigdir}/cogl-gst-1.0.pc
+%{_pkgconfigdir}/cogl-gst-2.0-experimental.pc
 
 %if %{with static_libs}
 %files gst-static
