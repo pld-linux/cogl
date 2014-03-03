@@ -286,9 +286,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS README
 %attr(755,root,root) %{_libdir}/libcogl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl.so.15
+%attr(755,root,root) %ghost %{_libdir}/libcogl.so.20
 %attr(755,root,root) %{_libdir}/libcogl-pango.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.15
+%attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.20
 %{_libdir}/girepository-1.0/Cogl-1.0.typelib
 %{_libdir}/girepository-1.0/CoglPango-1.0.typelib
 
@@ -324,7 +324,7 @@ rm -rf $RPM_BUILD_ROOT
 %files gles2
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcogl-gles2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl-gles2.so.15
+%attr(755,root,root) %ghost %{_libdir}/libcogl-gles2.so.20
 
 %files gles2-devel
 %defattr(644,root,root,755)
@@ -343,7 +343,7 @@ rm -rf $RPM_BUILD_ROOT
 %files gst
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcogl-gst.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl-gst.so.15
+%attr(755,root,root) %ghost %{_libdir}/libcogl-gst.so.20
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/libgstcogl.so
 
 %files gst-devel
