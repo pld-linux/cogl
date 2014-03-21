@@ -11,19 +11,19 @@
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.17.4
+Version:	1.18.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.17/%{name}-%{version}.tar.xz
-# Source0-md5:	6f8f3a6652de35eafc37ebbf95d09e17
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.18/%{name}-%{version}.tar.xz
+# Source0-md5:	994a29f5c02768367b6f035bfe456ba6
 Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
 %{?with_wayland:BuildRequires:	EGL-devel}
 %{?with_kms:BuildRequires:	Mesa-libgbm-devel}
 %{?with_wayland:BuildRequires:	Mesa-libwayland-egl-devel >= 1.0.0}
-%{?with_gles1:BuildRequires:	OpenGLESv1-devel >= 1.1}
 BuildRequires:	OpenGL-GLX-devel
+%{?with_gles1:BuildRequires:	OpenGLESv1-devel >= 1.1}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	cairo-devel >= 1.10
@@ -293,6 +293,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libcogl-path.so.20
 %{_libdir}/girepository-1.0/Cogl-1.0.typelib
 %{_libdir}/girepository-1.0/CoglPango-1.0.typelib
+%{_libdir}/girepository-1.0/Cogl-2.0.typelib
+%{_libdir}/girepository-1.0/CoglPango-2.0.typelib
 
 %files devel
 %defattr(644,root,root,755)
@@ -312,6 +314,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/cogl-path-2.0-experimental.pc
 %{_datadir}/gir-1.0/Cogl-1.0.gir
 %{_datadir}/gir-1.0/CoglPango-1.0.gir
+%{_datadir}/gir-1.0/Cogl-2.0.gir
+%{_datadir}/gir-1.0/CoglPango-2.0.gir
 
 %if %{with static_libs}
 %files static
@@ -352,6 +356,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libcogl-gst.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libcogl-gst.so.20
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/libgstcogl.so
+%{_libdir}/girepository-1.0/CoglGst-2.0.typelib
+
 
 %files gst-devel
 %defattr(644,root,root,755)
@@ -359,6 +365,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/cogl/cogl-gst
 %{_pkgconfigdir}/cogl-gst-1.0.pc
 %{_pkgconfigdir}/cogl-gst-2.0-experimental.pc
+%{_datadir}/gir-1.0/CoglGst-2.0.gir
 
 %if %{with static_libs}
 %files gst-static
