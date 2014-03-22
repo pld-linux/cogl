@@ -358,7 +358,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/libgstcogl.so
 %{_libdir}/girepository-1.0/CoglGst-2.0.typelib
 
-
 %files gst-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcogl-gst.so
