@@ -11,12 +11,12 @@
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.18.0
-Release:	2
+Version:	1.18.2
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.18/%{name}-%{version}.tar.xz
-# Source0-md5:	994a29f5c02768367b6f035bfe456ba6
+# Source0-md5:	952155d526d35f297737266408e842b5
 Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
 %{?with_wayland:BuildRequires:	EGL-devel}
