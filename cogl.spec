@@ -2,21 +2,24 @@
 # Conditional build
 %bcond_without	static_libs	# static libraries
 %bcond_without	gdkpixbuf	# gdk-pixbuf for image loading [instead of stb_image]
-%bcond_without	gles1		# OpenGL-ES 1.1 support
-%bcond_without	gles2		# OpenGL-ES 2.0 support
-%bcond_without	kms		# KMS EGL support
+%bcond_without	gles1		# OpenGL-ES 1.1 driver support
+%bcond_without	gles2		# OpenGL-ES 2.0 driver support
+%bcond_without	kms		# KMS EGL platform support
 %bcond_without	gstreamer	# GStreamer support
-%bcond_without	wayland		# Wayland EGL support
+%bcond_with	mir		# Mir EGL platform support (conflicts with wayland)
+%bcond_with	sdl1		# SDL 1.x winsys support (conflicts with sdl2)
+%bcond_with	sdl2		# SDL2 winsys support (conflicts with sdl1)
+%bcond_without	wayland		# Wayland EGL platform and server support
 
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.18.2
+Version:	1.20.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.18/%{name}-%{version}.tar.xz
-# Source0-md5:	952155d526d35f297737266408e842b5
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.20/%{name}-%{version}.tar.xz
+# Source0-md5:	5b28897194d9ff76a574a9493d1f7ee0
 Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
 %{?with_wayland:BuildRequires:	EGL-devel}
@@ -24,6 +27,8 @@ URL:		http://www.clutter-project.org/
 %{?with_wayland:BuildRequires:	Mesa-libwayland-egl-devel >= 1.0.0}
 BuildRequires:	OpenGL-GLX-devel
 %{?with_gles1:BuildRequires:	OpenGLESv1-devel >= 1.1}
+%{?with_sdl1:BuildRequires:	SDL-devel >= 1.2}
+%{?with_sdl2:BuildRequires:	SDL2-devel >= 2}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	cairo-devel >= 1.10
@@ -36,6 +41,8 @@ BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	gtk-doc >= 1.13
 BuildRequires:	libdrm-devel
 BuildRequires:	libtool >= 2:2.2.6
+# pkgconfig(mirclient)
+%{?with_mir:BuildRequires:	mir-devel >= 0.9.0}
 BuildRequires:	pango-devel >= 1:1.20
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
@@ -249,6 +256,9 @@ Dokumentacja API biblioteki cogl-gst.
 	--enable-gtk-doc \
 	--enable-introspection \
 	--enable-kms-egl-platform \
+	%{?with_mir:--enable-mir-egl-platform} \
+	%{?with_sdl1:--enable-sdl} \
+	%{?with_sdl2:--enable-sdl2} \
 	%{?with_static_libs:--enable-static} \
 	%{?with_wayland:--enable-wayland-egl-platform} \
 	%{?with_wayland:--enable-wayland-egl-server} \
