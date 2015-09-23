@@ -18,7 +18,7 @@ Version:	1.22.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.20/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.22/%{name}-%{version}.tar.xz
 # Source0-md5:	ab684ec96848d79d22757fb3064820c8
 Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
