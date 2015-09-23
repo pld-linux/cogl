@@ -14,12 +14,12 @@
 Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
-Version:	1.20.0
+Version:	1.22.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.20/%{name}-%{version}.tar.xz
-# Source0-md5:	5b28897194d9ff76a574a9493d1f7ee0
+# Source0-md5:	ab684ec96848d79d22757fb3064820c8
 Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
 %{?with_wayland:BuildRequires:	EGL-devel}
@@ -30,7 +30,7 @@ BuildRequires:	OpenGL-GLX-devel
 %{?with_sdl1:BuildRequires:	SDL-devel >= 1.2}
 %{?with_sdl2:BuildRequires:	SDL2-devel >= 2}
 BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake >= 1:1.11
+BuildRequires:	automake >= 1:1.14
 BuildRequires:	cairo-devel >= 1.10
 %{?with_gdkpixbuf:BuildRequires:	gdk-pixbuf2-devel >= 2.0}
 BuildRequires:	gettext-tools >= 0.18.1
