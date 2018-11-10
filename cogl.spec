@@ -15,7 +15,7 @@ Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
 Version:	1.22.2
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.22/%{name}-%{version}.tar.xz
@@ -24,7 +24,7 @@ Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
 %{?with_wayland:BuildRequires:	EGL-devel}
 %{?with_kms:BuildRequires:	Mesa-libgbm-devel}
-%{?with_wayland:BuildRequires:	Mesa-libwayland-egl-devel >= 1.0.0}
+%{?with_wayland:BuildRequires:	wayland-egl-devel >= 1.0.0}
 BuildRequires:	OpenGL-GLX-devel
 %{?with_gles1:BuildRequires:	OpenGLESv1-devel >= 1.1}
 %{?with_sdl1:BuildRequires:	SDL-devel >= 1.2}
@@ -90,7 +90,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_wayland:Requires:	EGL-devel}
 %{?with_kms:Requires:	Mesa-libgbm-devel}
-%{?with_wayland:Requires:	Mesa-libwayland-egl-devel >= 1.0.0}
+%{?with_wayland:Requires:	wayland-egl-devel >= 1.0.0}
 Requires:	cairo-devel >= 1.10
 %{?with_gdkpixbuf:Requires:	gdk-pixbuf2-devel >= 2.0}
 Requires:	glib2-devel >= 1:2.32.0
