@@ -223,9 +223,7 @@ Statyczna biblioteka cogl-gst.
 Summary:	API documentation for cogl-gst library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki cogl-gst
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description gst-apidocs
 API documentation for cogl-gst library.
