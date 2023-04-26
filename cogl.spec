@@ -45,6 +45,7 @@ BuildRequires:	libtool >= 2:2.2.6
 %{?with_mir:BuildRequires:	mir-devel >= 0.9.0}
 BuildRequires:	pango-devel >= 1:1.20
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	tar >= 1:1.22
 # wayland-client >= 1.0.0, wayland-server >= 1.1.90
 %{?with_wayland:BuildRequires:	wayland-devel >= 1.2.0}
