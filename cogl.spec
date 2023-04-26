@@ -22,7 +22,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/cogl/1.22/%{name}-%{version}.tar
 # Source0-md5:	7dd8b2e24171ef7399f851cea144b569
 Patch0:		%{name}-link.patch
 URL:		http://www.clutter-project.org/
-%{?with_wayland:BuildRequires:	EGL-devel}
+BuildRequires:	EGL-devel
 %{?with_kms:BuildRequires:	Mesa-libgbm-devel}
 BuildRequires:	OpenGL-GLX-devel
 %{?with_gles1:BuildRequires:	OpenGLESv1-devel >= 1.1}
