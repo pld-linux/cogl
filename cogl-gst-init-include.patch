@@ -1,0 +1,23 @@
+Declare gst_init() in the g-ir-scanner init section so the generated
+introspection probe compiles under modern GCC (where implicit function
+declarations are a hard error).
+
+Without an explicit declaration the scanner's generated CoglGst-2.0.c
+calls gst_init() with no prototype in scope and fails with:
+  error: implicit declaration of function 'gst_init'
+        [-Wimplicit-function-declaration]
+
+Cannot use "#include <gst/gst.h>" here because '#' starts a comment in
+Makefile.am, so spell out the prototype instead (matches gst/gst.h:65).
+
+--- cogl-1.22.8/cogl-gst/Makefile.am.orig
++++ cogl-1.22.8/cogl-gst/Makefile.am
+@@ -93,7 +93,7 @@
+ 	--c-include="gst/gst.h" \
+ 	--include-uninstalled=$(top_builddir)/cogl/Cogl-2.0.gir \
+ 	--pkg gstreamer-1.0 \
+-	--add-init-section="gst_init(NULL, NULL);"
++	--add-init-section="extern void gst_init(int *argc, char **argv[]); gst_init(NULL, NULL);"
+
+ INTROSPECTION_GIRS += CoglGst-2.0.gir
+
