@@ -1,0 +1,10 @@
+--- cogl-1.22.8/cogl/cogl-pipeline.c.orig	2020-06-04 14:47:52.000000000 +0200
++++ cogl-1.22.8/cogl/cogl-pipeline.c	2026-05-25 21:16:04.040642390 +0200
+@@ -1667,6 +1667,7 @@ _cogl_pipeline_prune_to_n_layers (CoglPi
+    * before we change the number of layers */
+   state.keep_n = n;
+   state.current_pos = 0;
++  state.first_index_to_prune = 0;
+   _cogl_pipeline_foreach_layer_internal (pipeline,
+                                          update_prune_layers_info_cb,
+                                          &state);

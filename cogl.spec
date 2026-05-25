@@ -15,7 +15,7 @@ Summary:	A library for using 3D graphics hardware to draw pretty pictures
 Summary(pl.UTF-8):	Biblioteka do rysowania ładnych obrazków przy użyciu sprzętowej grafiki 3D
 Name:		cogl
 Version:	1.22.8
-Release:	4
+Release:	5
 License:	LGPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/cogl/1.22/%{name}-%{version}.tar.xz
@@ -23,6 +23,7 @@ Source0:	https://download.gnome.org/sources/cogl/1.22/%{name}-%{version}.tar.xz
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-tesselator-casts.patch
 Patch2:		%{name}-gst-init-include.patch
+Patch3:		%{name}-uninitialized.patch
 URL:		http://www.clutter-project.org/
 BuildRequires:	EGL-devel
 BuildRequires:	Mesa-libEGL-devel
@@ -242,6 +243,7 @@ Dokumentacja API biblioteki cogl-gst.
 %patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
+%patch -P3 -p1
 
 %build
 %{__gettextize}
