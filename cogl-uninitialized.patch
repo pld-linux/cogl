@@ -8,3 +8,23 @@
    _cogl_pipeline_foreach_layer_internal (pipeline,
                                           update_prune_layers_info_cb,
                                           &state);
+--- cogl-1.22.8/cogl-gst/cogl-gst-video-sink.c.orig	2020-06-04 13:57:11.000000000 +0200
++++ cogl-1.22.8/cogl-gst/cogl-gst-video-sink.c	2026-05-25 21:41:54.265269210 +0200
+@@ -1723,7 +1723,7 @@ cogl_gst_video_sink_get_natural_size (Co
+ float
+ cogl_gst_video_sink_get_natural_width (CoglGstVideoSink *vt)
+ {
+-  float width;
++  float width = 0.;
+   cogl_gst_video_sink_get_natural_size (vt, &width, NULL);
+   return width;
+ }
+@@ -1731,7 +1731,7 @@ cogl_gst_video_sink_get_natural_width (C
+ float
+ cogl_gst_video_sink_get_natural_height (CoglGstVideoSink *vt)
+ {
+-  float height;
++  float height = 0.;
+   cogl_gst_video_sink_get_natural_size (vt, NULL, &height);
+   return height;
+ }
