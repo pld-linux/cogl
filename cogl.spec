@@ -305,12 +305,12 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS README
-%attr(755,root,root) %{_libdir}/libcogl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl.so.20
-%attr(755,root,root) %{_libdir}/libcogl-pango.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl-pango.so.20
-%attr(755,root,root) %{_libdir}/libcogl-path.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl-path.so.20
+%{_libdir}/libcogl.so.*.*.*
+%ghost %{_libdir}/libcogl.so.20
+%{_libdir}/libcogl-pango.so.*.*.*
+%ghost %{_libdir}/libcogl-pango.so.20
+%{_libdir}/libcogl-path.so.*.*.*
+%ghost %{_libdir}/libcogl-path.so.20
 %{_libdir}/girepository-1.0/Cogl-1.0.typelib
 %{_libdir}/girepository-1.0/CoglPango-1.0.typelib
 %{_libdir}/girepository-1.0/Cogl-2.0.typelib
@@ -318,9 +318,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libcogl.so
-%attr(755,root,root) %{_libdir}/libcogl-pango.so
-%attr(755,root,root) %{_libdir}/libcogl-path.so
+%{_libdir}/libcogl.so
+%{_libdir}/libcogl-pango.so
+%{_libdir}/libcogl-path.so
 %dir %{_includedir}/cogl
 %{_includedir}/cogl/cogl
 %{_includedir}/cogl/cogl-pango
@@ -353,12 +353,12 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with gles2}
 %files gles2
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libcogl-gles2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl-gles2.so.20
+%{_libdir}/libcogl-gles2.so.*.*.*
+%ghost %{_libdir}/libcogl-gles2.so.20
 
 %files gles2-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libcogl-gles2.so
+%{_libdir}/libcogl-gles2.so
 %{_includedir}/cogl/cogl-gles2
 %{_pkgconfigdir}/cogl-gles2-1.0.pc
 %{_pkgconfigdir}/cogl-gles2-2.0-experimental.pc
@@ -373,14 +373,14 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with gstreamer}
 %files gst
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libcogl-gst.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcogl-gst.so.20
-%attr(755,root,root) %{_libdir}/gstreamer-1.0/libgstcogl.so
+%{_libdir}/libcogl-gst.so.*.*.*
+%ghost %{_libdir}/libcogl-gst.so.20
+%{_libdir}/gstreamer-1.0/libgstcogl.so
 %{_libdir}/girepository-1.0/CoglGst-2.0.typelib
 
 %files gst-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libcogl-gst.so
+%{_libdir}/libcogl-gst.so
 %{_includedir}/cogl/cogl-gst
 %{_pkgconfigdir}/cogl-gst-1.0.pc
 %{_pkgconfigdir}/cogl-gst-2.0-experimental.pc
